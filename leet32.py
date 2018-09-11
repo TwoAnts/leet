@@ -25,6 +25,7 @@ def longest_p(s):
                     l_cnt -= 1
                     if l_cnt == 0:
                         last_r = r
+                        first_l_cnt = 0
                 else:
                     break
             r += 1
