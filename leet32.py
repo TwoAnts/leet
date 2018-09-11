@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 #-*- coding : utf-8-*-
-
+'''
 #still wrong
-
 def longest_p(s):
     if not s:
         return 0
@@ -39,6 +38,41 @@ def longest_p(s):
         r = l
         l_cnt = 0
 
+    return longest
+'''
+
+'''
+def longest_p(s):
+    if not s:
+        return 0
+    dp = [0 for _ in range(len(s))]
+    for i in range(1, len(s)):
+        if s[i] == ')':
+            if s[i - 1] == '(':
+                dp[i] = 2
+            elif i - 1 - dp[i - 1] >= 0 and s[i - 1 - dp[i - 1]] == '(':
+                dp[i] = 2 + dp[i - 1]
+            else: 
+                continue
+            if i - dp[i] >= 0 and dp[i - dp[i]] > 0:
+                dp[i] += dp[i - dp[i]]
+    return max(dp)
+'''
+def longest_p(s):
+    if not s:
+        return 0
+    longest = 0
+    stack = [-1]
+    for i, c in enumerate(s):
+        if c == '(':
+            stack.append(i)
+        else:
+            if stack:
+                stack.pop()
+                if stack:
+                    longest = max(longest, i - stack[-1])
+            if not stack:
+                stack.append(i)
     return longest
  
 def t(s, ans):
